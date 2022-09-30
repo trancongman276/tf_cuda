@@ -68,7 +68,7 @@ RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/
         git \
         && \
     find /usr/local/cuda-${CUDA}/lib64/ -type f -name 'lib*_static.a' -not -name 'libcudart_static.a' -delete && \
-    rm /usr/lib/${LIB_DIR_PREFIX}-linux-gnu/libcudnn_static_v8.a
+    rm -f /usr/lib/${LIB_DIR_PREFIX}-linux-gnu/libcudnn_static_v8.a
 
 # Install TensorRT if not building for PowerPC
 # NOTE: libnvinfer uses cuda11.1 versions
