@@ -108,7 +108,7 @@ RUN apt-get update && apt-get install -y \
     python3.9 
 #    python3-pip
 
-RUN python3 -m pip --no-cache-dir install --upgrade \
+RUN python3.9 -m pip --no-cache-dir install --upgrade \
     "pip<20.3" \
     setuptools
 
@@ -125,7 +125,7 @@ RUN apt-get update && apt-get install -y \
     virtualenv \
     swig
 
-RUN python3 -m pip --no-cache-dir install \
+RUN python3.9 -m pip --no-cache-dir install \
     Pillow \
     h5py \
     tb-nightly \
