@@ -23,7 +23,8 @@ ARG UBUNTU_VERSION=20.04
 
 ARG ARCH=
 ARG CUDA=11.6
-FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}.2-base-ubuntu${UBUNTU_VERSION} as base
+# FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}.2-base-ubuntu${UBUNTU_VERSION} as base
+FROM hieupth/minicuda:11.6.2-devel
 # ARCH and CUDA are specified again because the FROM directive resets ARGs
 # (but their default value is retained if set previously)
 ARG ARCH
@@ -104,13 +105,13 @@ RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/lib
 # See http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
 
-RUN apt-get update && apt-get install -y \
-    python3.9 python3-distutils && \
-    wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py && \
-    python3.9 get-pip.py
+# RUN apt-get update && apt-get install -y \
+#    python3.9 python3-distutils && \
+#    wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py && \
+#    python3.9 get-pip.py
 #    python3-pip
 
-RUN python3.9 -m pip --no-cache-dir install --upgrade \
+RUN python3 -m pip --no-cache-dir install --upgrade \
     "pip<20.3" \
     setuptools
 
@@ -127,7 +128,7 @@ RUN apt-get update && apt-get install -y \
     virtualenv \
     swig
 
-RUN python3.9 -m pip --no-cache-dir install \
+RUN python3 -m pip --no-cache-dir install \
     Pillow \
     h5py \
     tb-nightly \
