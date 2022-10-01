@@ -25,20 +25,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: Build and push runtime image
+        name: Build and push 
         uses: docker/build-push-action@v3
         with:
           push: true
           context: .
           tags: doku9652/tf_cuda:11.6.2-delve
-          build-args: |
-            FLAVOR=runtime
-      -
-        name: Build and push devel image
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          context: .
-          tags: doku9652/tf_cuda:11.6.2-delve
-          build-args: |
-            FLAVOR=devel
