@@ -105,7 +105,7 @@ RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/lib
 ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y \
-    python3.9 && \
+    python3.9 python3-distutils && \
     wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py && \
     python3.9 get-pip.py
 #    python3-pip
