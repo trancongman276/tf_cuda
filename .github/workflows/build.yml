@@ -31,3 +31,6 @@ jobs:
           push: true
           context: .
           tags: doku9652/tf_cuda:11.4.3-delve
+          build-args: |
+            CUDA=11.4
+            CUDNN=8.2.4.15-1
