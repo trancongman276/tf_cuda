@@ -74,8 +74,8 @@ RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/
 # Install TensorRT if not building for PowerPC
 # NOTE: libnvinfer uses cuda11.1 versions
 RUN [[ "${ARCH}" = "ppc64le" ]] || { apt-get update && \
-        apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64/7fa2af80.pub && \
-        echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /"  > /etc/apt/sources.list.d/tensorRT.list && \
+        apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub && \
+        echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /"  > /etc/apt/sources.list.d/tensorRT.list && \
         apt-get update && \
         apt-get install -y --no-install-recommends libnvinfer${LIBNVINFER_MAJOR_VERSION}=${LIBNVINFER}+cuda11.0 \
         libnvinfer-dev=${LIBNVINFER}+cuda11.0 \
