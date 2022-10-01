@@ -22,14 +22,14 @@
 ARG UBUNTU_VERSION=20.04
 
 ARG ARCH=
-ARG CUDA=11.6
+ARG CUDA=11.4
 # FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}.2-base-ubuntu${UBUNTU_VERSION} as base
-FROM hieupth/minicuda:11.6.2-devel
+FROM doku9652/minicuda:11.4.3-devel
 # ARCH and CUDA are specified again because the FROM directive resets ARGs
 # (but their default value is retained if set previously)
 ARG ARCH
 ARG CUDA
-ARG CUDNN=8.4.0.27-1
+ARG CUDNN=8.2.2.26-1
 ARG CUDNN_MAJOR_VERSION=8
 ARG LIB_DIR_PREFIX=x86_64
 ARG LIBNVINFER=7.2.2-1
@@ -85,9 +85,9 @@ RUN [[ "${ARCH}" = "ppc64le" ]] || { apt-get update && \
         && rm -rf /var/lib/apt/lists/*; }
 
 # Configure the build for our CUDA configuration.
-ENV LD_LIBRARY_PATH /usr/local/cuda-11.6/targets/x86_64-linux/lib:/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:/usr/include/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/cuda/lib64/stubs:/usr/local/cuda-11.6/lib64:/usr/local/cuda-11.6/lib64
+ENV LD_LIBRARY_PATH /usr/local/cuda-11.0/targets/x86_64-linux/lib:/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:/usr/include/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/cuda/lib64/stubs:/usr/local/cuda-11.0/lib64:/usr/local/cuda-${CUDA}/lib64
 ENV TF_NEED_CUDA 1
-ENV TF_NEED_TENSORRT 1
+ENV TF_NEED_TENSORRT 0
 ENV TF_CUDA_VERSION=${CUDA}
 ENV TF_CUDNN_VERSION=${CUDNN_MAJOR_VERSION}
 # CACHE_STOP is used to rerun future commands, otherwise cloning tensorflow will be cached and will not pull the most recent version
